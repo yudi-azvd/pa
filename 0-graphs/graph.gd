@@ -90,3 +90,22 @@ func to_str() -> String:
 		result += "\n"
 		i += 1
 	return result
+
+
+static func from_file(path: String) -> Graph:
+	if not FileAccess.file_exists(path):
+		var msg = 'Could not open file %s' % path
+		push_error(msg)
+		return null
+
+	var file = FileAccess.open(path, FileAccess.READ)
+	var _vertices: int = file.get_line().to_int()
+	var _edges: int = file.get_line().to_int()
+
+	var graph = Graph.new(_vertices)
+	for i in range(_edges):
+		var vw = file.get_line().split(' ')
+		graph.add_edge(int(vw[0]), int(vw[1]))
+	file.close()
+	return graph
+
