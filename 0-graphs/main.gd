@@ -1,8 +1,6 @@
 extends SceneTree
 
 func _init() -> void:
-	print('Hello world!')
-
 	var g = Graph.new(6)
 	g.add_edge(0, 2)
 	g.add_edge(0, 1)
@@ -21,6 +19,6 @@ func _init() -> void:
 	g.add_edge(5, 3)
 	g.add_edge(5, 0)
 	print(g.to_str())
-
-func _finalize() -> void:
-	pass
+	g.free()
+	
+	quit()

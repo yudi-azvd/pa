@@ -32,6 +32,6 @@ Para executar algum script GDScript, faça:
 Se você não instalou o executável no _path_, substitua `godot` nos comandos
 anteriores por `./<caminho relativo para o executável Godot>`. Exemplo:
     
-    ~/Downloads/Godot_v<...versão...> -s 0-graphs/main.gd  --headless
+    ~/Downloads/Godot_v<...versão...> -s 0-graphs/main.gd --headless
 
 Para mais informações consulte o [tutorial da CLI](https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html).
