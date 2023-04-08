@@ -9,15 +9,26 @@ Baixe esse repositório e entre nele:
     git clone https://github.com/yudi-azvd/pa
     cd pa
 
+## JavaScript
+
+Você precisa ter [Node.js](https://nodejs.org/en) instalado no seu computador
+e um gerenciador de pacotes do Node como Yarn ou
+[PNPM](https://pnpm.io/installation) (mais rapidinho pra instalar dependências).
+
+```
+pnpm i
+pnpm test
+```
+
 ## Godot
 
 [Godot](https://godotengine.org/) é uma game engine Open Source e foi usada para
-desenvolver algumas das atividades. Se você quiser testá-la nesse repositório, 
+desenvolver algumas das atividades. Se você quiser testá-la nesse repositório,
 você precisa apenas de uma cópia do [executável](https://godotengine.org/download/)
-da engine para a sua distribuição e, opcionalmente, instalá-lo no _path_ da sua 
+da engine para a sua distribuição e, opcionalmente, instalá-lo no _path_ da sua
 máquina (prefira instalar a versão [4.0.2](https://github.com/godotengine/godot/releases/tag/4.0.2-stable)).
 
-Se você instalou o executável no _path_, você deve poder iniciar o Godot apenas 
+Se você instalou o executável no _path_, você deve poder iniciar o Godot apenas
 digitando no terminal:
 
     godot
@@ -31,7 +42,7 @@ Para executar algum script GDScript, faça:
 
 Se você não instalou o executável no _path_, substitua `godot` nos comandos
 anteriores por `./<caminho relativo para o executável Godot>`. Exemplo:
-    
+
     ~/Downloads/Godot_v<...versão...> -s 0-graphs/main.gd --headless
 
 Para mais informações consulte o [tutorial da CLI](https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html).
