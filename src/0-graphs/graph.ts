@@ -61,10 +61,9 @@ class Graph {
    */
   static fromString(s: string) {
     const lines = s.split('\n')
-
     const [vertices, _] = lines.splice(0, 2)
-
     const g = new Graph(Number(vertices))
+
     for (let i = 0; i < lines.length; i++) {
       const [v, w] = lines[i].split(' ')
       g.addEdge(Number(v), Number(w))
