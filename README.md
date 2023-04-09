@@ -13,7 +13,7 @@ Baixe esse repositório e entre nele:
 
 Você precisa ter [Node.js](https://nodejs.org/en) instalado no seu computador
 e um gerenciador de pacotes do Node como Yarn ou
-[PNPM](https://pnpm.io/installation) (mais rapidinho pra instalar dependências).
+[pnpm](https://pnpm.io/installation) (mais rapidinho pra instalar dependências).
 
 ```
 pnpm i
