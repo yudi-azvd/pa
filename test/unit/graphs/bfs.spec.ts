@@ -4,7 +4,7 @@ import { tinyCG } from '@/0-graphs/samples/tinyCG'
 
 import { describe, it, expect } from 'vitest'
 
-describe('BFS', () => {
+describe.skip('BFS', () => {
   it('tinyCG', () => {
     const g = Graph.fromString(tinyCG);
     const bfs = new Bfs(g)

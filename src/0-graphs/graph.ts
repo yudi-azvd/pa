@@ -16,11 +16,24 @@ class Graph {
   vertices: number = 0
 
   constructor(vertices: number) {
+    if (vertices < 0)
+      throw new Error('Invalid number of vertices')
     this.adj = new Array(vertices)
     this.vertices = vertices
   }
 
+  private validateVertex(v: number) {
+    if (v < 0 || v > this.vertices)
+      throw new Error('Invalid vertex ' + v)
+  }
+
+  /**
+   * Não checa se `v` ou `w` já estão conectados.
+   */
   addEdge(v: number, w: number) {
+    this.validateVertex(v)
+    this.validateVertex(w)
+
     this.edges++
     this.adj[w] = Node.create(v, this.adj[w])
     this.adj[v] = Node.create(w, this.adj[v])
