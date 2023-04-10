@@ -14,6 +14,7 @@ export default class Bfs {
 
   private bfs(src: number) {
     const queue: number[] = []
+    console.log(src);
 
     for (let i = 0; i < this.graph.adj.length; i++) {
       if (this.visited[i])
