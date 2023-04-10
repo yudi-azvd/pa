@@ -4,12 +4,6 @@ import { setTinyG_PACoordinates, tinyG_PA } from "../samples/tinyG_PA"
 
 let g: Graph
 
-g = Graph.fromString(tinyG_PA)
-setTinyG_PACoordinates(g, 3)
-
-g = Graph.fromString(tinyCG)
-setTinyCGCoordinates(g, 3)
-
 const canvas = document.querySelector<HTMLCanvasElement>('#canvas')!
 const context = canvas.getContext('2d')!
 
