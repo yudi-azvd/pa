@@ -1,8 +1,8 @@
-class Node {
+export class Node {
   data = 0
   next: Node | null = null
 
-  static create(vertex: number, next: Node) {
+  static create(vertex: number, next: Node | null) {
     const n = new Node()
     n.data = vertex
     n.next = next
@@ -10,16 +10,27 @@ class Node {
   }
 }
 
+export type Vector = {
+  x: number
+  y: number
+}
+
 class Graph {
-  adj: Node[] = [];
+  adj: (Node | null)[] = [];
   edges: number = 0
   vertices: number = 0
+  coords: Vector[] = []
 
   constructor(vertices: number) {
     if (vertices < 0)
       throw new Error('Invalid number of vertices')
+
     this.adj = new Array(vertices)
     this.vertices = vertices
+    this.coords = new Array(vertices)
+    for (let i = 0; i < this.coords.length; i++) {
+      this.coords[i] = { x: 0, y: 0 }
+    }
   }
 
   private validateVertex(v: number) {
@@ -74,14 +85,17 @@ class Graph {
    */
   static fromString(s: string) {
     const lines = s.split('\n')
-    const [vertices, _] = lines.splice(0, 2)
+    const [vertices, edges] = lines.splice(0, 2)
     const g = new Graph(Number(vertices))
 
-    for (let i = 0; i < lines.length; i++) {
+    let i = 0
+    for (; i < lines.length; i++) {
       const [v, w] = lines[i].split(' ')
       g.addEdge(Number(v), Number(w))
     }
 
+    if (i !== Number(edges))
+      throw new Error(`${i} === ${edges} The given string is problably bad formatted`)
     return g
   }
 }

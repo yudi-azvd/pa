@@ -1,7 +1,9 @@
 import Graph from '@/0-graphs/graph'
 import { tinyCG } from '@/0-graphs/samples/tinyCG'
 import { tinyG } from '@/0-graphs/samples/tinyG'
+import { tinyG_PA } from '@/0-graphs/samples/tinyG_PA'
 import { tinyGex2 } from '@/0-graphs/samples/tinyGex2'
+
 import { describe, it, expect, assert } from 'vitest'
 
 let g: Graph
@@ -49,6 +51,7 @@ describe('Graph', () => {
     [tinyCG, 8],
     [tinyG, 13],
     [tinyGex2, 16],
+    [tinyG_PA, 7],
   ])('graph %p has %p edges', (graph: string, edges: number) => {
     g = Graph.fromString(graph);
     expect(g.edges).toEqual(edges)
