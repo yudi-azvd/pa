@@ -36,8 +36,7 @@ function main() {
     <option ${i === 0 ? 'selected="selected"' : ''} value="${i}"> ${option.label} </option>
   `).join('\n')
 
-  select.onchange = (ev: Event) => {
-    console.log('change', select.value);
+  select.onchange = () => {
     const option = graphOptions[Number(select.value)]
     showGraph(option)
   }
@@ -63,9 +62,9 @@ function clearContext(context: CanvasRenderingContext2D) {
 }
 
 function renderGraphNodes(nodes: (Node | null)[], coords: Vector[]) {
-  context.font = '18px Inter'
+  context.font = '18px Helvetica'
 
-  let offset = 4
+  let offset = 5
   for (let i = 0; i < nodes.length; i++) {
     context.fillStyle = '#fff'
     context.strokeStyle = '#0f0'
