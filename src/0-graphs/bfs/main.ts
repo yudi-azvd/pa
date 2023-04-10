@@ -1,11 +1,17 @@
+import Bfs from "../bfs"
 import Graph, { Vector, Node } from "../graph"
 import { setTinyCGCoordinates, tinyCG } from "../samples/tinyCG"
 import { setTinyG_PACoordinates, tinyG_PA } from "../samples/tinyG_PA"
 
 let g: Graph
+let bfs: Bfs
+let b: Graph
 
-const canvas = document.querySelector<HTMLCanvasElement>('#canvas')!
-const context = canvas.getContext('2d')!
+const canvasOriginal = document.querySelector<HTMLCanvasElement>('#canvas-original')!
+const contextOriginal = canvasOriginal.getContext('2d')!
+
+const canvasBfs = document.querySelector<HTMLCanvasElement>('#canvas-bfs')!
+const contextBfs = canvasBfs.getContext('2d')!
 
 interface GraphOption {
   graphAsStr: string,
@@ -26,14 +32,15 @@ const graphOptions: GraphOption[] = [
   }
 ]
 
-let option = graphOptions[0]
+const DEFAULT_GRAPTH_OPTION = 1
+let option = graphOptions[DEFAULT_GRAPTH_OPTION]
 
 main()
 
 function main() {
   const select = document.querySelector<HTMLSelectElement>('#select-graph')!
   select.innerHTML = graphOptions.map((option, i) => `
-    <option ${i === 0 ? 'selected="selected"' : ''} value="${i}"> ${option.label} </option>
+    <option ${i === DEFAULT_GRAPTH_OPTION ? 'selected="selected"' : ''} value="${i}"> ${option.label} </option>
   `).join('\n')
 
   select.onchange = () => {
@@ -48,20 +55,32 @@ function main() {
 function showGraph(option: GraphOption) {
   g = Graph.fromString(option.graphAsStr)
   option.setCoords(g, 3)
-  clearContext(context)
-  renderGraphEdges(g.adj, g.coords)
-  renderGraphNodes(g.adj, g.coords)
+
+  clearContext(contextOriginal, canvasOriginal)
+  renderGraphEdges(contextOriginal, g.adj, g.coords)
+  renderGraphNodes(contextOriginal, g.adj, g.coords)
+
+  bfs = new Bfs(g)
+  b = bfs.bfsTree
+  option.setCoords(b, 3)
+  clearContext(contextBfs, canvasBfs)
+  renderGraphEdges(contextBfs, b.adj, b.coords)
+  renderGraphNodes(contextBfs, b.adj, b.coords)
+
+  document.querySelector<HTMLPreElement>('#pre-original')!.innerHTML = g.toString()
+  document.querySelector<HTMLPreElement>('#pre-bfs')!.innerHTML = b.toString()
+  // codeOriginal.innerHTML = g.toString()
 }
 
 
-function clearContext(context: CanvasRenderingContext2D) {
-  context.fillStyle = document.querySelector('body')?.style.backgroundColor!
+function clearContext(context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
   const width = Number(canvas.getAttribute('width'))
   const height = Number(canvas.getAttribute('height'))
+  context.fillStyle = document.querySelector('body')?.style.backgroundColor!
   context.fillRect(0, 0, width, height)
 }
 
-function renderGraphNodes(nodes: (Node | null)[], coords: Vector[]) {
+function renderGraphNodes(context: CanvasRenderingContext2D, nodes: (Node | null)[], coords: Vector[]) {
   context.font = '18px Helvetica'
 
   let offset = 5
@@ -77,7 +96,7 @@ function renderGraphNodes(nodes: (Node | null)[], coords: Vector[]) {
   }
 }
 
-function renderGraphEdges(nodes: (Node | null)[], coords: Vector[]) {
+function renderGraphEdges(context: CanvasRenderingContext2D, nodes: (Node | null)[], coords: Vector[]) {
   let node: Node | null = null
   let curr: Node | null = null
 

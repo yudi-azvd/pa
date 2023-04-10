@@ -7,7 +7,7 @@ import { describe, it, expect } from 'vitest'
 let g: Graph
 let bfs: Bfs
 
-describe.skip('BFS', () => {
+describe('BFS', () => {
   it('tinyCG', () => {
     g = Graph.fromString(tinyG_PA);
     bfs = new Bfs(g)
