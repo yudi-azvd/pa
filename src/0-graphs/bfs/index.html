@@ -12,19 +12,27 @@
     <div id="app">
       <a href="/">Início</a>
 
-      <h1>Grafos - BFS</h1>
+      <h1>Grafos > BFS</h1>
 
       <div id="main" style="display: flex;">
         <select name="myselect" id="select-graph"></select>
-        <div>
+
+        <div id="two-panel">
           <div class="canvas-pre">
-            <canvas width="400" height="300" id="canvas-original"></canvas>
+            <h3>Original </h3>
+            <canvas width="350" height="300" id="canvas-original"></canvas>
             <p>Grafo em texto:</p>
             <pre id="pre-original"></pre>
           </div>
 
+          <!-- <span>
+            Eu quero colocar um espaço bem aqui, mas
+            <code>justify-content</code> não funciona
+          </span> -->
+
           <div class="canvas-pre">
-            <canvas width="400" height="300" id="canvas-bfs"></canvas>
+            <h3>BFS </h3>
+            <canvas width="350" height="300" id="canvas-bfs"></canvas>
             <p>Grafo em texto:</p>
             <pre id="pre-bfs"></pre>
           </div>

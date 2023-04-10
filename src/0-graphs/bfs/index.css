@@ -1,23 +1,25 @@
-body {
-  display: block;
-}
-
-#app div canvas {
-  border-color: purple;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-}
-
-#main > div {
-  display: flex;
-  justify-content: space-between;
-}
-
-#main > select {
+#select-graph {
   margin-bottom: 8px;
 }
 
+#two-panel {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .canvas-pre {
+  /* border: 2px solid green; */
   display: flex;
   flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.canvas-pre h3 {
+  text-align: center;
+}
+
+.canvas-pre canvas {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
 }

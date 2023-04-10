@@ -29,7 +29,6 @@ export default class Bfs {
           if (!this.visited[v.data]) {
             this.visited[v.data] = true
             this.bfsTree.addEdge(v.data, u)
-            console.log('populating tree', v.data, u);
             queue.push(v.data)
           }
           v = v.next
