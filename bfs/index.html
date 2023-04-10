@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/icon.png" />
+    <link rel="stylesheet" type="text/css" href="/src/global.css">
+    <link rel="stylesheet" type="text/css" href="bfs.css">
+    <title>Grafos - BFS</title>
+  </head>
+  <body>
+    <div id="app">
+      <a href="/">Início</a>
+
+      <h1>Grafos > BFS</h1>
+
+      <div id="main" style="display: flex;">
+        <select name="myselect" id="select-graph"></select>
+
+        <div id="two-panel">
+          <div class="canvas-pre">
+            <h3>Original </h3>
+            <canvas width="350" height="300" id="canvas-original"></canvas>
+            <p>Grafo em texto:</p>
+            <pre id="pre-original"></pre>
+          </div>
+
+          <!-- <span>
+            Eu quero colocar um espaço bem aqui, mas
+            <code>justify-content</code> não funciona
+          </span> -->
+
+          <div class="canvas-pre">
+            <h3>BFS </h3>
+            <canvas width="350" height="300" id="canvas-bfs"></canvas>
+            <p>Grafo em texto:</p>
+            <pre id="pre-bfs"></pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <script type="module" src="/src/0-graphs/bfs/main.ts"></script>
+  </body>
+</html>
