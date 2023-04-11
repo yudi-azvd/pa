@@ -2,7 +2,8 @@
 
 Repositório para a disciplina de Projeto de Algoritmos da Universidade de Brasília.
 
-Dá uma olhada em https://yudi-azvd.github.io/pa/.
+Dá uma olhada em https://yudi-azvd.github.io/pa/. Se deu tudo certo,
+a página vai estar estilizada. Se não, paciência x( Tô arrumando ainda.
 
 ## Setup
 
