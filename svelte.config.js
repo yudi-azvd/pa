@@ -10,11 +10,11 @@ const config = {
 
   kit: {
     paths: {
-      base: dev ? '' : '/pa'
+      base: dev ? '' : '/pa',
     },
     adapter: adapter(),
     alias: {
-      '@/*': path.resolve('src/'),
+      '@/*': path.resolve('src/*'),
     },
   },
 }

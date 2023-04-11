@@ -1,6 +1,7 @@
-import Graph from '../graph'
+import type Graph from '@/0-graphs/graph'
+import type { GraphSample } from './sample'
 
-export const tinyCG = `6
+const graph = `6
 8
 0 5
 2 4
@@ -11,7 +12,7 @@ export const tinyCG = `6
 3 5
 0 2`
 
-export function setTinyCGCoordinates(g: Graph, scale = 1): void {
+function setCoords(g: Graph, scale = 1): void {
   g.coords[0].x = 10 * scale
   g.coords[0].y = 10 * scale
 
@@ -29,4 +30,10 @@ export function setTinyCGCoordinates(g: Graph, scale = 1): void {
 
   g.coords[5].x = 10 * scale
   g.coords[5].y = 50 * scale
+}
+
+export const tinyCG: GraphSample = {
+  label: 'tiny CG',
+  sample: graph,
+  setCoords
 }

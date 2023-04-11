@@ -10,10 +10,8 @@
     <h1>Projeto de Algoritmos</h1>
   </div>
 
-  <p>{base + '/icon.png'} 222</p>
-
   <ul class="links">
-    <li>Grafos oi</li>
+    <li>Grafos</li>
     <ol>
       <li><a href="{base}/bfs">BFS</a></li>
       <li><a class="disabled" href="{base}/">DFS</a></li>

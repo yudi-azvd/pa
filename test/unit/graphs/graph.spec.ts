@@ -33,10 +33,10 @@ describe('Graph', () => {
   })
 
   it.each([
-    [tinyCG, 8],
-    [tinyG, 13],
-    [tinyGex2, 16],
-    [tinyG_PA, 7],
+    [tinyCG.sample, 8],
+    [tinyG.sample, 13],
+    [tinyGex2.sample, 16],
+    [tinyG_PA.sample, 7],
   ])('graph %p has %p edges', (graph: string, edges: number) => {
     g = Graph.fromString(graph)
     expect(g.edges).toEqual(edges)
