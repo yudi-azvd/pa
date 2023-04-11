@@ -1,5 +1,4 @@
-export const tinyGex2 =
-  `12
+export const tinyGex2 = `12
 16
  8 4
  2 3

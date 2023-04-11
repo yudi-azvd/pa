@@ -16,14 +16,13 @@ export type Vector = {
 }
 
 class Graph {
-  adj: (Node | null)[] = [];
-  edges: number = 0
-  vertices: number = 0
+  adj: (Node | null)[] = []
+  edges = 0
+  vertices = 0
   coords: Vector[] = []
 
   constructor(vertices: number) {
-    if (vertices < 0)
-      throw new Error('Invalid number of vertices')
+    if (vertices < 0) throw new Error('Invalid number of vertices')
 
     this.adj = new Array(vertices)
     this.vertices = vertices
@@ -34,8 +33,7 @@ class Graph {
   }
 
   private validateVertex(v: number) {
-    if (v < 0 || v > this.vertices)
-      throw new Error('Invalid vertex ' + v)
+    if (v < 0 || v > this.vertices) throw new Error('Invalid vertex ' + v)
   }
 
   /**
@@ -99,6 +97,5 @@ class Graph {
     return g
   }
 }
-
 
 export default Graph

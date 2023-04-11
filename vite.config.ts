@@ -1,11 +1,9 @@
-/// <reference types="vitest" />
+import { sveltekit } from '@sveltejs/kit/vite'
 import { defineConfig } from 'vitest/config'
-import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
-  plugins: [tsconfigPaths()],
-  test: {},
-  build: {
+  plugins: [sveltekit()],
+  test: {
+    include: ['{src,test}/**/*.{test,spec}.ts'],
   },
-  base: '/pa'
 })

@@ -1,11 +1,10 @@
-import Graph from "../graph"
+import Graph from '../graph'
 
 /**
  * É o mesmo da imagem tinG_PA, mas considerando que o nó 0
  * é omitido.
  */
-export const tinyG_PA =
-  `8
+export const tinyG_PA = `8
 7
 1 2
 1 5
@@ -15,7 +14,7 @@ export const tinyG_PA =
 2 6
 3 7`
 
-export function setTinyG_PACoordinates(g: Graph, scale: number = 1): void {
+export function setTinyG_PACoordinates(g: Graph, scale = 1): void {
   g.coords[0].x = 10 * scale
   g.coords[0].y = 10 * scale
 
@@ -40,4 +39,3 @@ export function setTinyG_PACoordinates(g: Graph, scale: number = 1): void {
   g.coords[7].x = 80 * scale
   g.coords[7].y = 25 * scale
 }
-

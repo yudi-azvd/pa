@@ -1,29 +1,26 @@
-import Graph, { Node } from "./graph";
+import Graph, { Node } from './graph'
 
 export default class Bfs {
-  visited: boolean[];
+  visited: boolean[]
   bfsTree: Graph
 
-  constructor(private graph: Graph, src: number = 0) {
+  constructor(private graph: Graph, src = 0) {
     this.visited = new Array(graph.vertices).fill(false)
     this.bfsTree = new Graph(graph.vertices)
     this.bfs(src)
-
-    console.log(this.visited);
   }
 
   private bfs(src: number) {
     const queue: number[] = []
-    console.log(src);
-
-    for (let i = 0; i < this.graph.adj.length; i++) {
-      if (this.visited[i])
-        continue
+    let i = src++
+    for (i = 0; i < this.graph.adj.length; i++) {
+      if (this.visited[i]) continue
 
       queue.push(i)
       this.visited[i] = true
 
       while (queue.length !== 0) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const u = queue.shift()!
         let v: Node | null = this.graph.adj[u]
         while (v) {

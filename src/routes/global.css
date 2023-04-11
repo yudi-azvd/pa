@@ -58,7 +58,7 @@ h1 {
   transition: filter 300ms;
 }
 #pa-logo:hover {
-  filter: drop-shadow(0 0 2em #8F9ADC);
+  filter: drop-shadow(0 0 2em #8f9adc);
 }
 
 #app .links {
@@ -98,8 +98,6 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
-
 
 /* .logo {
   height: 6em;

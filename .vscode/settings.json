@@ -1,5 +1,7 @@
 {
-    "godot_tools.editor_path": "/usr/local/bin/godot",
-    "editor.formatOnSave": true,
-    "vitest.enable": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "vitest.enable": true
 }

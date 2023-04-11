@@ -1,5 +1,4 @@
-export const tinyG =
-  `13
+export const tinyG = `13
 13
 0 5
 4 3

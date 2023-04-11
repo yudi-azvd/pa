@@ -1,20 +1,4 @@
-# Godot 4+ specific ignores
-.godot/
-godot/
 data/
-
-# Godot-specific ignores
-.import/
-export.cfg
-export_presets.cfg
-
-# Imported translations (automatically generated from CSV files)
-*.translation
-
-# Mono-specific ignores
-.mono/
-data_*/
-mono_crash.*.json
 
 # Logs
 logs
@@ -39,3 +23,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Svelte stuff
+.DS_Store
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
