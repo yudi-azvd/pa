@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { base } from '$app/paths'
-  import { buildRenderGraphs } from './util'
+  import { buildRenderGraphs } from './canvas'
   import { tinyCG } from '@/0-graphs/samples/tinyCG'
   import { tinyG_PA } from '@/0-graphs/samples/tinyG_PA'
   import type Graph from '@/0-graphs/graph'
@@ -10,12 +10,16 @@
 
   let g: Graph
   let b: Graph
+  let d: Graph
 
   let canvasOriginal: HTMLCanvasElement
   let contextOriginal: CanvasRenderingContext2D | null
 
   let canvasBfs: HTMLCanvasElement
   let contextBfs: CanvasRenderingContext2D | null
+
+  let canvasDfs: HTMLCanvasElement
+  let contextDfs: CanvasRenderingContext2D | null
 
   const graphOptions: GraphSample[] = [tinyCG, tinyG_PA, tinyG]
 
@@ -26,12 +30,15 @@
   onMount(() => {
     contextOriginal = canvasOriginal.getContext('2d')
     contextBfs = canvasBfs.getContext('2d')
-    if (contextOriginal && contextBfs) {
-      ;({ g, b } = buildRenderGraphs(
+    contextDfs = canvasDfs.getContext('2d')
+    if (contextOriginal && contextBfs && contextDfs) {
+      ;({ g, b, d } = buildRenderGraphs(
         canvasOriginal,
         contextOriginal,
         canvasBfs,
         contextBfs,
+        canvasDfs,
+        contextDfs,
         option,
       ))
     }
@@ -53,12 +60,14 @@
     on:change={(ev) => {
       graphOptionId = Number(ev.currentTarget.value)
       option = graphOptions[graphOptionId]
-      if (contextOriginal && contextBfs) {
-        ;({ g, b } = buildRenderGraphs(
+      if (contextOriginal && contextBfs && contextDfs) {
+        ;({ g, b, d } = buildRenderGraphs(
           canvasOriginal,
           contextOriginal,
           canvasBfs,
           contextBfs,
+          canvasDfs,
+          contextDfs,
           option,
         ))
       }
@@ -74,7 +83,7 @@
   <div id="two-panel">
     <div class="canvas-pre">
       <h3>Original</h3>
-      <canvas width="350" height="300" id="canvas-original" bind:this={canvasOriginal} />
+      <canvas width="300" height="300" id="canvas-original" bind:this={canvasOriginal} />
       <p>Grafo original em texto:</p>
 
       {#if g}
@@ -84,10 +93,19 @@
 
     <div class="canvas-pre">
       <h3>BFS</h3>
-      <canvas width="350" height="300" id="canvas-bfs" bind:this={canvasBfs} />
+      <canvas width="300" height="300" id="canvas-bfs" bind:this={canvasBfs} />
       <p>Grafo BFS em texto:</p>
       {#if b}
         <pre>{b.toString()} </pre>
+      {/if}
+    </div>
+
+    <div class="canvas-pre">
+      <h3>DFS</h3>
+      <canvas width="300" height="300" id="canvas-bfs" bind:this={canvasDfs} />
+      <p>Grafo DFS em texto:</p>
+      {#if d}
+        <pre>{d.toString()} </pre>
       {/if}
     </div>
   </div>
