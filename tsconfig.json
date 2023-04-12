@@ -10,11 +10,11 @@
     "sourceMap": true,
     "strict": true,
     // Não era pra isso ser necessário
-    "baseUrl": "src",
-    "paths": {
-      "@/*": ["*"],
-      "@/test/*": ["test/*"]
-    }
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@/*": ["src/*"],
+    //   "@/test/*": ["test/*"]
+    // }
   },
   "include": ["src", "test"]
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias

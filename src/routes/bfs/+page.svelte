@@ -6,6 +6,7 @@
   import { tinyG_PA } from '@/0-graphs/samples/tinyG_PA'
   import type Graph from '@/0-graphs/graph'
   import type { GraphSample } from '@/0-graphs/samples/sample'
+  import { tinyG } from '@/0-graphs/samples/tinyG'
 
   let g: Graph
   let b: Graph
@@ -16,9 +17,9 @@
   let canvasBfs: HTMLCanvasElement
   let contextBfs: CanvasRenderingContext2D | null
 
-  const graphOptions: GraphSample[] = [tinyCG, tinyG_PA]
+  const graphOptions: GraphSample[] = [tinyCG, tinyG_PA, tinyG]
 
-  const DEFAULT_GRAPTH_OPTION = 1
+  const DEFAULT_GRAPTH_OPTION = 2
   let graphOptionId = DEFAULT_GRAPTH_OPTION
   let option = graphOptions[DEFAULT_GRAPTH_OPTION]
 
@@ -74,22 +75,17 @@
     <div class="canvas-pre">
       <h3>Original</h3>
       <canvas width="350" height="300" id="canvas-original" bind:this={canvasOriginal} />
-      <p>Grafo em texto:</p>
+      <p>Grafo original em texto:</p>
 
       {#if g}
         <pre>{g.toString()} </pre>
       {/if}
     </div>
 
-    <!-- <span>
-      Eu quero colocar um espaço bem aqui, mas
-      <code>justify-content</code> não funciona
-    </span> -->
-
     <div class="canvas-pre">
       <h3>BFS</h3>
       <canvas width="350" height="300" id="canvas-bfs" bind:this={canvasBfs} />
-      <p>Grafo em texto:</p>
+      <p>Grafo BFS em texto:</p>
       {#if b}
         <pre>{b.toString()} </pre>
       {/if}
@@ -103,8 +99,9 @@
   }
 
   #two-panel {
-    display: flex;
-    justify-content: space-evenly;
+    max-width: 1280px;
+    display: flex !important;
+    justify-content: space-between !important;
   }
 
   .canvas-pre {
@@ -112,7 +109,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 1;
   }
 
   .canvas-pre h3 {
@@ -120,7 +116,7 @@
   }
 
   .canvas-pre canvas {
-    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
+    box-shadow: 0 0 15px 15px rgba(0, 0, 0, 0.1);
   }
 </style>

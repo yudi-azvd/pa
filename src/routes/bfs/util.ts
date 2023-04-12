@@ -2,6 +2,15 @@ import Bfs from "@/0-graphs/bfs"
 import Graph, { Node, type Vector } from "@/0-graphs/graph"
 import type { GraphSample } from "@/0-graphs/samples/sample"
 
+const textColor = '#fff'
+const accentColor = '#646cff'
+const nodeBackgroundColor = '#242424'
+const nodeRadius = 14
+const canvasBackgroundColor = '#2e2e2e'
+const lineWidth = 2
+
+const coordsScale = 3
+
 export function buildRenderGraphs(
   canvasOriginal: HTMLCanvasElement,
   ctxOriginal: CanvasRenderingContext2D,
@@ -10,14 +19,14 @@ export function buildRenderGraphs(
   option: GraphSample,
 ) {
   const g = Graph.fromString(option.sample)
-  option.setCoords(g, 3)
+  option.setCoords(g, coordsScale)
   clearContext(ctxOriginal, canvasOriginal)
   renderGraphEdges(ctxOriginal, g.adj, g.coords)
   renderGraphNodes(ctxOriginal, g.adj, g.coords)
 
   const bfs = new Bfs(g)
   const b = bfs.bfsTree
-  option.setCoords(b, 3)
+  option.setCoords(b, coordsScale)
   clearContext(ctxBfs, canvasBfs)
   renderGraphEdges(ctxBfs, b.adj, b.coords)
   renderGraphNodes(ctxBfs, b.adj, b.coords)
@@ -28,7 +37,7 @@ export function buildRenderGraphs(
 export function clearContext(
   context: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
-  color = '#000',
+  color = canvasBackgroundColor,
 ) {
   const width = Number(canvas.getAttribute('width'))
   const height = Number(canvas.getAttribute('height'))
@@ -42,16 +51,16 @@ export function renderGraphNodes(
   coords: Vector[],
 ) {
   context.font = '18px Helvetica'
-
+  context.lineWidth = lineWidth
   const offset = 5
   for (let i = 0; i < nodes.length; i++) {
-    context.fillStyle = '#fff'
-    context.strokeStyle = '#0f0'
+    context.fillStyle = nodeBackgroundColor
+    context.strokeStyle = accentColor
     context.beginPath()
-    context.arc(coords[i].x, coords[i].y, 12, 0, 2 * Math.PI)
+    context.arc(coords[i].x, coords[i].y, nodeRadius, 0, 2 * Math.PI)
     context.fill()
     context.stroke()
-    context.fillStyle = '#000'
+    context.fillStyle = textColor
     context.fillText(String(i), coords[i].x - offset, coords[i].y + offset)
   }
 }
@@ -64,8 +73,9 @@ export function renderGraphEdges(
   let node: Node | null = null
   let curr: Node | null = null
 
-  context.fillStyle = '#fff'
-  context.strokeStyle = '#0f0'
+  context.lineWidth = lineWidth
+  context.fillStyle = nodeBackgroundColor
+  context.strokeStyle = accentColor
   for (let i = 0; i < nodes.length; i++) {
     node = nodes[i]
     curr = node

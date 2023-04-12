@@ -42,20 +42,20 @@ function setCoords(g: Graph, scale = 1) {
   g.coords[7].x = 80 * scale
   g.coords[7].y = 15 * scale
 
-  g.coords[8].x = 90 * scale
+  g.coords[8].x = 95 * scale
   g.coords[8].y = 15 * scale
 
   g.coords[9].x = 80 * scale
   g.coords[9].y = 40 * scale
 
-  g.coords[10].x = 90 * scale
+  g.coords[10].x = 95 * scale
   g.coords[10].y = 40 * scale
 
   g.coords[11].x = 80 * scale
-  g.coords[11].y = 50 * scale
+  g.coords[11].y = 55 * scale
 
-  g.coords[12].x = 90 * scale
-  g.coords[12].y = 50 * scale
+  g.coords[12].x = 95 * scale
+  g.coords[12].y = 55 * scale
 }
 
 const label = 'tiny G'
