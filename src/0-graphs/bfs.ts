@@ -12,6 +12,7 @@ export default class Bfs {
 
   private bfs(src: number) {
     // FIXME: quase certeza que essa fila não tem a complexidade de uma fila
+    // tradicional.
     const queue: number[] = []
     let i = src++
     for (i = 0; i < this.graph.adj.length; i++) {

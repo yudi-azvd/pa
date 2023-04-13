@@ -1,4 +1,4 @@
-import type { GraphSample } from "./sample"
+import type { GraphSample } from './sample'
 
 export const graph = `12
 16
@@ -22,5 +22,7 @@ export const graph = `12
 export const tinyGex2: GraphSample = {
   label: 'tiny Gex2',
   sample: graph,
-  setCoords: () => { console.error('coords not set') },
+  setCoords: () => {
+    console.error('coords not set')
+  },
 }

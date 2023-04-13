@@ -35,5 +35,5 @@ function setCoords(g: Graph, scale = 1): void {
 export const tinyCG: GraphSample = {
   label: 'tiny CG',
   sample: graph,
-  setCoords
+  setCoords,
 }

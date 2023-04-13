@@ -1,7 +1,7 @@
-import Bfs from "@/0-graphs/bfs"
-import Dfs from "@/0-graphs/dfs"
-import Graph, { Node, type Vector } from "@/0-graphs/graph"
-import type { GraphSample } from "@/0-graphs/samples/sample"
+import Bfs from '@/0-graphs/bfs'
+import Dfs from '@/0-graphs/dfs'
+import Graph, { Node, type Vector } from '@/0-graphs/graph'
+import type { GraphSample } from '@/0-graphs/samples/sample'
 
 const textSize = '16px'
 const textColor = '#fff'

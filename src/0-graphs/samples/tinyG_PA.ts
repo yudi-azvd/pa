@@ -44,5 +44,5 @@ export function setCoords(g: Graph, scale = 1): void {
 export const tinyG_PA: GraphSample = {
   label: 'tiny G PA',
   sample: graph,
-  setCoords
+  setCoords,
 }

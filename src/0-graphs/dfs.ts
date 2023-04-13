@@ -1,4 +1,4 @@
-import Graph, { Node } from "./graph"
+import Graph, { Node } from './graph'
 
 export default class Dfs {
   visited: boolean[]
@@ -9,8 +9,7 @@ export default class Dfs {
     this.dfsTree = new Graph(graph.vertices)
 
     for (let v = 0; v < this.graph.adj.length; v++) {
-      if (!this.visited[v])
-        this.dfs(v)
+      if (!this.visited[v]) this.dfs(v)
     }
   }
 

@@ -1,5 +1,5 @@
-import type Graph from "../graph"
-import type { GraphSample } from "./sample"
+import type Graph from '../graph'
+import type { GraphSample } from './sample'
 
 const graph = `13
 13
