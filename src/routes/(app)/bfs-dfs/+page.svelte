@@ -49,65 +49,61 @@
   <title>Grafos > BFS</title>
 </svelte:head>
 
-<div id="main" style="display: flex; flex-direction: column">
-  <a href="{base}/">Início</a>
+<h1>Grafos > BFS</h1>
 
-  <h1>Grafos > BFS</h1>
+<select
+  id="select-graph-option"
+  value={graphOptionId}
+  on:change={(ev) => {
+    graphOptionId = Number(ev.currentTarget.value)
+    option = graphOptions[graphOptionId]
+    if (contextOriginal && contextBfs && contextDfs) {
+      ;({ g, b, d } = buildRenderGraphs(
+        canvasOriginal,
+        contextOriginal,
+        canvasBfs,
+        contextBfs,
+        canvasDfs,
+        contextDfs,
+        option,
+      ))
+    }
+  }}
+>
+  {#each graphOptions as option, i}
+    <option value={i}>
+      {option.label}
+    </option>
+  {/each}
+</select>
 
-  <select
-    id="select-graph-option"
-    value={graphOptionId}
-    on:change={(ev) => {
-      graphOptionId = Number(ev.currentTarget.value)
-      option = graphOptions[graphOptionId]
-      if (contextOriginal && contextBfs && contextDfs) {
-        ;({ g, b, d } = buildRenderGraphs(
-          canvasOriginal,
-          contextOriginal,
-          canvasBfs,
-          contextBfs,
-          canvasDfs,
-          contextDfs,
-          option,
-        ))
-      }
-    }}
-  >
-    {#each graphOptions as option, i}
-      <option value={i}>
-        {option.label}
-      </option>
-    {/each}
-  </select>
+<div id="two-panel">
+  <div class="canvas-pre">
+    <h3>Original</h3>
+    <canvas width="300" height="300" id="canvas-original" bind:this={canvasOriginal} />
+    <p>Grafo original em texto:</p>
 
-  <div id="two-panel">
-    <div class="canvas-pre">
-      <h3>Original</h3>
-      <canvas width="300" height="300" id="canvas-original" bind:this={canvasOriginal} />
-      <p>Grafo original em texto:</p>
+    {#if g}
+      <pre>{g.toString()} </pre>
+    {/if}
+  </div>
 
-      {#if g}
-        <pre>{g.toString()} </pre>
-      {/if}
-    </div>
+  <div class="canvas-pre">
+    <h3>BFS</h3>
+    <canvas width="300" height="300" id="canvas-bfs" bind:this={canvasBfs} />
+    <p>Grafo BFS em texto:</p>
+    {#if b}
+      <pre>{b.toString()} </pre>
+    {/if}
+  </div>
 
-    <div class="canvas-pre">
-      <h3>BFS</h3>
-      <canvas width="300" height="300" id="canvas-bfs" bind:this={canvasBfs} />
-      <p>Grafo BFS em texto:</p>
-      {#if b}
-        <pre>{b.toString()} </pre>
-      {/if}
-    </div>
-
-    <div class="canvas-pre">
-      <h3>DFS</h3>
-      <canvas width="300" height="300" id="canvas-bfs" bind:this={canvasDfs} />
-      <p>Grafo DFS em texto:</p>
-      {#if d}
-        <pre>{d.toString()} </pre>
-      {/if}
-    </div>
+  <div class="canvas-pre">
+    <h3>DFS</h3>
+    <canvas width="300" height="300" id="canvas-bfs" bind:this={canvasDfs} />
+    <p>Grafo DFS em texto:</p>
+    {#if d}
+      <pre>{d.toString()} </pre>
+    {/if}
   </div>
 </div>
 
@@ -131,10 +127,5 @@
 
   .canvas-pre h3 {
     text-align: center;
-  }
-
-  .canvas-pre canvas {
-    border-radius: 8px;
-    box-shadow: 0 0 15px 15px rgba(0, 0, 0, 0.1);
   }
 </style>

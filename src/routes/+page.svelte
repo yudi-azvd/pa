@@ -13,8 +13,8 @@
   <ul class="links">
     <li>Grafos</li>
     <ol>
-      <li><a href="{base}/bfs">BFS</a></li>
-      <li><a class="disabled" href="{base}/">DFS</a></li>
+      <li><a href="{base}/bfs-dfs">BFS e DFS</a></li>
+      <li><a href="{base}/floodfill">Flood Fill</a></li>
     </ol>
     <li><a class="disabled" href="{base}/">Gananciosos</a></li>
     <li><a class="disabled" href="{base}/">Dividir e Consquitar</a></li>
