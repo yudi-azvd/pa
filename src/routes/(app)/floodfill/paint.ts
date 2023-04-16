@@ -1,15 +1,15 @@
-interface Color {
-  r: number
-  g: number
-  b: number
-  a: number
-}
+// interface Color {
+//   r: number
+//   g: number
+//   b: number
+//   a: number
+// }
 
-export function bucketFillStartingFrom(
-  canvas: HTMLCanvasElement,
-  context: CanvasRenderingContext2D,
+export async function bucketFillStartingFrom(
   x: number,
   y: number,
+  canvas: HTMLCanvasElement,
+  context: CanvasRenderingContext2D,
   newColor: string,
 ) {
   const width = canvas.width
@@ -19,25 +19,18 @@ export function bucketFillStartingFrom(
   const imageData = context.getImageData(0, 0, width, height)
 
   const startColorIndex = Math.trunc(y * width * 4 + x * 4)
-  const startColor: Color = {
-    r: pixel[0],
-    g: pixel[1],
-    b: pixel[2],
-    a: pixel[3],
-  }
+  // const startColor: Color = {
+  //   r: pixel[0],
+  //   g: pixel[1],
+  //   b: pixel[2],
+  //   a: pixel[3],
+  // }
 
   const color = hexStrToRgba(newColor)
-
-  // imageData.data[startColorIndex + 0] = color[0]
-  // imageData.data[startColorIndex + 1] = color[1]
-  // imageData.data[startColorIndex + 2] = color[2]
-  // imageData.data[startColorIndex + 3] = color[3]
-
-  bfsFill(imageData, pixel, color, startColorIndex, context)
-  // context.putImageData(imageData, 0, 0)
+  await bfsFill(imageData, pixel, color, startColorIndex, context)
 }
 
-function bfsFill(
+async function bfsFill(
   imageData: ImageData,
   startColor: Uint8ClampedArray,
   fillColor: number[],
@@ -47,25 +40,15 @@ function bfsFill(
   if (colorsEqual(startIndex, imageData.data, fillColor)) return
 
   const width = imageData.width
+  const row = width * 4
   const length = imageData.data.length
   /** Fila de índices */
   const queue: number[] = []
 
-  // console.log(imageData.data[startIndex + 0])
-  // console.log(imageData.data[startIndex + 1])
-  // console.log(imageData.data[startIndex + 2])
-  // console.log(imageData.data[startIndex + 3])
-  console.log({ width })
-
   queue.push(startIndex)
-  // if (isWithinBounds(startIndex, length)) queue.push(startIndex)
 
   while (queue.length !== 0) {
     const i = queue.shift()!
-    // console.log({ i })
-    // console.log(toColor(i, imageData), startColor)
-
-    //   console.log('visitando i', i)
     if (!isWithinBounds(i, length)) continue
 
     if (!colorsEqual(i, imageData.data, fillColor)) {
@@ -74,21 +57,16 @@ function bfsFill(
       imageData.data[i + 2] = fillColor[2]
       imageData.data[i + 3] = fillColor[3]
       context.putImageData(imageData, 0, 0)
+      await new Promise((r) => setTimeout(r, 1))
 
-      imageData.data[i - width + 0] = 255
-      imageData.data[i - width + 1] = 255
-      imageData.data[i - width + 2] = 255
-      imageData.data[i - width + 3] = 255
-      context.putImageData(imageData, 0, 0)
-      return
-      // if (isWithinBounds(i + 4, length) && colorsEqual(i + 4, imageData.data, startColor))
-      //   queue.push(i + 4)
-      // if (isWithinBounds(i - 4, length) && colorsEqual(i - 4, imageData.data, startColor))
-      //   queue.push(i - 4)
-      // if (isWithinBounds(i + width, length) && colorsEqual(i + width, imageData.data, startColor))
-      //   queue.push(i + width)
-      // if (isWithinBounds(i - width, length) && colorsEqual(i - width, imageData.data, startColor))
-      //   queue.push(i - width)
+      if (isWithinBounds(i + 4, length) && colorsEqual(i + 4, imageData.data, startColor))
+        queue.push(i + 4)
+      if (isWithinBounds(i - 4, length) && colorsEqual(i - 4, imageData.data, startColor))
+        queue.push(i - 4)
+      if (isWithinBounds(i + row, length) && colorsEqual(i + row, imageData.data, startColor))
+        queue.push(i + row)
+      if (isWithinBounds(i - row, length) && colorsEqual(i - row, imageData.data, startColor))
+        queue.push(i - row)
     }
   }
 }

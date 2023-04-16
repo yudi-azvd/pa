@@ -3,6 +3,7 @@
   import { base } from '$app/paths'
   import { bucketFillStartingFrom } from './paint'
 
+  let done = true
   let canvas: HTMLCanvasElement
   let context: CanvasRenderingContext2D | null
   let selectedColor = '#8A2BE2'
@@ -12,28 +13,29 @@
    * https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images
    */
 
-  // const defaultImage = `${base}/me@512.png`
-  const defaultImage = `${base}/fractal.bmp`
+  const defaultImage = `${base}/van-g-square.png`
   const pagetitle = 'Grafos > Flood Fill'
 
-  let files: FileList
-
   const onFileChange = (e: Event) => {
-    // if (!context) return
-    // console.log(e)
-    let image = e.target.files[0]
-    // console.log(image)
+    if (!context) {
+      alert('Canvas not ready. Try later.')
+    }
 
-    // // reader.readAsDataURL(image)
-    // // reader.onload = e => {
-    // //   e.target?.result
-    // // }
-    // console.log(typeof image)
-    // // console.log(files[0])
-    // // context.drawImage(image, 0, 0)
+    let image = new Image()
+    image.onload = () => {
+      canvas.height = image.height
+      canvas.width = image.width
+      context!.drawImage(image, 0, 0)
+    }
+    image.src = URL.createObjectURL(e.target!.files[0])
+
+    console.log(image.height, image.width)
   }
 
-  function onCanvasClick(e: MouseEvent) {
+  async function onCanvasClick(e: MouseEvent) {
+    if (!done) {
+      return
+    }
     if (!context) return
     const rect = canvas.getBoundingClientRect()
     let x = e.clientX - rect.left
@@ -41,7 +43,9 @@
     x = Math.trunc((x * canvas.width) / canvas.clientWidth)
     y = Math.trunc((y * canvas.height) / canvas.clientHeight)
 
-    bucketFillStartingFrom(canvas, context, x, y, selectedColor)
+    done = false
+    await bucketFillStartingFrom(x, y, canvas, context, selectedColor)
+    done = true
   }
 
   onMount(() => {
@@ -49,7 +53,10 @@
     context = canvas.getContext('2d', { willReadFrequently: true })!
     const image = new Image()
     image.onload = () => {
-      if (context) context.drawImage(image, 0, 0)
+      if (!context) return
+      canvas.height = image.height
+      canvas.width = image.width
+      context.drawImage(image, 0, 0)
     }
 
     image.src = defaultImage
@@ -62,16 +69,35 @@
 
 <h1>{pagetitle}</h1>
 
-<canvas width="50" height="50" bind:this={canvas} on:click={onCanvasClick} />
+<p>Clique em qualquer lugar da imagem e veja a mágica acontecer:</p>
+
+<canvas width="300" height="150" bind:this={canvas} on:click={onCanvasClick} />
+
+{#if done}
+  <p>Pronto!</p>
+{:else}
+  <p>Pintando...</p>
+{/if}
 
 <div class="inputs">
-  <input type="color" bind:value={selectedColor} />
-  <input type="file" on:change={onFileChange} src={defaultImage} bind:files />
+  <div>
+    <span>Cor selecionada:</span>
+    <input type="color" bind:value={selectedColor} />
+  </div>
+  <input type="file" on:change={onFileChange} src={defaultImage} />
 </div>
 
-<div class="selected-color">
-  <p>Cor selecionada:</p>
-  <div style="background: {selectedColor};" />
+<br />
+<hr />
+
+<div>
+  <p>Melhorias a serem feitas:</p>
+
+  <ul>
+    <li>Adicionar configuração de <em>threshold</em> para detecção de cor</li>
+    <li>Adicionar seleção de BFS ou DFS</li>
+    <li>Permitir que <em>fill</em>s possam ocorrer a partir de vários pontos simultaneamente</li>
+  </ul>
 </div>
 
 <style>
@@ -80,6 +106,7 @@
     image-rendering: pixelated;
     image-rendering: crisp-edges;
     image-rendering: -moz-crisp-edges;
+    max-width: 500px;
   }
 
   p {
@@ -92,15 +119,7 @@
     justify-content: space-between;
   }
 
-  .selected-color {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .selected-color div {
-    width: 16px;
-    height: 16px;
+  hr {
+    width: 300px;
   }
 </style>
