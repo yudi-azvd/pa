@@ -12,8 +12,6 @@ Baixe esse repositório e entre nele:
     git clone https://github.com/yudi-azvd/pa
     cd pa
 
-## JavaScript
-
 Você precisa ter [Node.js](https://nodejs.org/en) instalado no seu computador
 e um gerenciador de pacotes do Node como Yarn ou
 [pnpm](https://pnpm.io/installation) (mais rapidinho pra instalar dependências).
