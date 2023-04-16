@@ -1,5 +1,9 @@
 # Projeto de Algoritmos
 
+<p style="text-align: center;">
+  <img width="400px" src="static/screenshot.png" alt="screenshot da página inicial">
+</p>
+
 Repositório para a disciplina de Projeto de Algoritmos da Universidade de Brasília.
 
 Dá uma olhada em https://yudi-azvd.github.io/pa/. Se deu tudo certo,
