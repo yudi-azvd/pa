@@ -89,7 +89,8 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
+    background-color: #ececec;
   }
   a:hover {
     color: #747bff;
@@ -119,3 +120,4 @@ button:focus-visible {
 .read-the-docs {
   color: #888;
 } */
+#app.svelte-1jic7lq .content.svelte-1jic7lq{margin:0 auto}canvas{box-shadow:0 0 15px 15px rgba(0, 0, 0, 0.2)}

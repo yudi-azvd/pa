@@ -6,16 +6,15 @@
     <link rel="icon" href="./pa/icon.png" />
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="content-security-policy" content="">
-		<link href="./pa/_app/immutable/assets/_layout.e39c24ad.css" rel="stylesheet">
-		<link rel="modulepreload" href="./pa/_app/immutable/entry/start.6a0b8d8f.js">
-		<link rel="modulepreload" href="./pa/_app/immutable/chunks/index.af8f3d20.js">
-		<link rel="modulepreload" href="./pa/_app/immutable/chunks/singletons.3fb5676f.js">
-		<link rel="modulepreload" href="./pa/_app/immutable/chunks/paths.59ca159b.js">
-		<link rel="modulepreload" href="./pa/_app/immutable/entry/app.5e123bf0.js">
-		<link rel="modulepreload" href="./pa/_app/immutable/entry/_layout.svelte.f6b4e216.js">
+		<link rel="modulepreload" href="./pa/_app/immutable/entry/start.63b1d728.js">
+		<link rel="modulepreload" href="./pa/_app/immutable/chunks/index.bf1d3eaf.js">
+		<link rel="modulepreload" href="./pa/_app/immutable/chunks/singletons.b84fd882.js">
+		<link rel="modulepreload" href="./pa/_app/immutable/chunks/paths.e34400ae.js">
+		<link rel="modulepreload" href="./pa/_app/immutable/entry/app.10ceaf75.js">
+		<link rel="modulepreload" href="./pa/_app/immutable/entry/layout.svelte.afad87f4.js">
 		<link rel="modulepreload" href="./pa/_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./pa/_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./pa/_app/immutable/entry/_page.svelte.32d2e6b5.js">
+		<link rel="modulepreload" href="./pa/_app/immutable/entry/_page.svelte.2d8c1674.js">
     <title>Projeto de Algoritmos</title>
   </head>
   <body data-sveltekit-preload-data="hover">
@@ -25,11 +24,9 @@
 <div id="app"><div><a href="https://github.com/yudi-azvd/pa" target="_blank"><img alt="logo do repositório" id="pa-logo" width="120" src="/pa/icon.png"></a>
     <h1>Projeto de Algoritmos</h1></div>
 
-  <p>/pa/icon.png 222</p>
-
-  <ul class="links"><li>Grafos oi</li>
-    <ol><li><a href="/pa/bfs">BFS</a></li>
-      <li><a class="disabled" href="/pa/">DFS</a></li></ol>
+  <ul class="links"><li>Grafos</li>
+    <ol><li><a href="/pa/bfs-dfs">BFS e DFS</a></li>
+      <li><a href="/pa/floodfill">Flood Fill</a></li></ol>
     <li><a class="disabled" href="/pa/">Gananciosos</a></li>
     <li><a class="disabled" href="/pa/">Dividir e Consquitar</a></li>
     <li><a class="disabled" href="/pa/">Programação Dinâmica</a></li></ul></div>
@@ -38,7 +35,7 @@
 			
 			<script>
 				{
-					__sveltekit_36kahp = {
+					__sveltekit_16xux09 = {
 						env: {},
 						assets: "/pa",
 						base: new URL("./pa", location).pathname,
@@ -48,11 +45,11 @@
 					const data = [null,null];
 
 					Promise.all([
-						import("./pa/_app/immutable/entry/start.6a0b8d8f.js"),
-						import("./pa/_app/immutable/entry/app.5e123bf0.js")
+						import("./pa/_app/immutable/entry/start.63b1d728.js"),
+						import("./pa/_app/immutable/entry/app.10ceaf75.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_36kahp.element, {
-							node_ids: [0, 2],
+						kit.start(app, __sveltekit_16xux09.element, {
+							node_ids: [0, 3],
 							data,
 							form: null,
 							error: null
