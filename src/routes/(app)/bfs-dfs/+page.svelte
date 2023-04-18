@@ -1,11 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { base } from '$app/paths'
   import { buildRenderGraphs } from './canvas'
   import { tinyCG } from '@/0-graphs/samples/tinyCG'
   import { tinyG_PA } from '@/0-graphs/samples/tinyG_PA'
   import type Graph from '@/0-graphs/graph'
-  import type { GraphSample } from '@/0-graphs/samples/sample'
   import { tinyG } from '@/0-graphs/samples/tinyG'
 
   let g: Graph
@@ -21,7 +19,7 @@
   let canvasDfs: HTMLCanvasElement
   let contextDfs: CanvasRenderingContext2D | null
 
-  const graphOptions: GraphSample[] = [tinyCG, tinyG_PA, tinyG]
+  const graphOptions = [tinyCG, tinyG_PA, tinyG]
 
   const DEFAULT_GRAPTH_OPTION = 2
   let graphOptionId = DEFAULT_GRAPTH_OPTION
@@ -119,7 +117,6 @@
   }
 
   .canvas-pre {
-    /* border: 2px solid green; */
     display: flex;
     flex-direction: column;
     align-items: center;

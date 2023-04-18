@@ -7,6 +7,7 @@
   let canvas: HTMLCanvasElement
   let context: CanvasRenderingContext2D | null
   let selectedColor = '#8A2BE2'
+  let fillStrategy: '1' | '2' = '1'
 
   /**
    * Carregar imagens no canvas
@@ -28,8 +29,6 @@
       context!.drawImage(image, 0, 0)
     }
     image.src = URL.createObjectURL(e.target!.files[0])
-
-    console.log(image.height, image.width)
   }
 
   async function onCanvasClick(e: MouseEvent) {
@@ -44,7 +43,7 @@
     y = Math.trunc((y * canvas.height) / canvas.clientHeight)
 
     done = false
-    await bucketFillStartingFrom(x, y, canvas, context, selectedColor)
+    await bucketFillStartingFrom(x, y, canvas, context, selectedColor, fillStrategy)
     done = true
   }
 
@@ -85,6 +84,10 @@
     <input type="color" bind:value={selectedColor} />
   </div>
   <input type="file" on:change={onFileChange} src={defaultImage} />
+  <select bind:value={fillStrategy}>
+    <option value="1">BFS</option>
+    <option value="2">DFS</option>
+  </select>
 </div>
 
 <br />
@@ -95,8 +98,7 @@
 
   <ul>
     <li>Adicionar configuração de <em>threshold</em> para detecção de cor</li>
-    <li>Adicionar seleção de BFS ou DFS</li>
-    <li>Permitir que <em>fill</em>s possam ocorrer a partir de vários pontos simultaneamente</li>
+    <li>Permitir que <em>fill</em>s possam ocorrer a partir de vários pontos simultaneamente?</li>
   </ul>
 </div>
 

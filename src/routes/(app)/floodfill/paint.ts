@@ -11,6 +11,7 @@ export async function bucketFillStartingFrom(
   canvas: HTMLCanvasElement,
   context: CanvasRenderingContext2D,
   newColor: string,
+  fillStrategy: '1' | '2',
 ) {
   const width = canvas.width
   const height = canvas.height
@@ -27,7 +28,8 @@ export async function bucketFillStartingFrom(
   // }
 
   const color = hexStrToRgba(newColor)
-  await bfsFill(imageData, pixel, color, startColorIndex, context)
+  if (fillStrategy === '1') await bfsFill(imageData, pixel, color, startColorIndex, context)
+  else dfsFill(imageData, pixel, color, startColorIndex, context)
 }
 
 async function bfsFill(
@@ -49,6 +51,47 @@ async function bfsFill(
 
   while (queue.length !== 0) {
     const i = queue.shift()!
+    if (!isWithinBounds(i, length)) continue
+
+    if (!colorsEqual(i, imageData.data, fillColor)) {
+      imageData.data[i + 0] = fillColor[0]
+      imageData.data[i + 1] = fillColor[1]
+      imageData.data[i + 2] = fillColor[2]
+      imageData.data[i + 3] = fillColor[3]
+      context.putImageData(imageData, 0, 0)
+      await new Promise((r) => setTimeout(r, 1))
+
+      if (isWithinBounds(i + 4, length) && colorsEqual(i + 4, imageData.data, startColor))
+        queue.push(i + 4)
+      if (isWithinBounds(i - 4, length) && colorsEqual(i - 4, imageData.data, startColor))
+        queue.push(i - 4)
+      if (isWithinBounds(i + row, length) && colorsEqual(i + row, imageData.data, startColor))
+        queue.push(i + row)
+      if (isWithinBounds(i - row, length) && colorsEqual(i - row, imageData.data, startColor))
+        queue.push(i - row)
+    }
+  }
+}
+
+async function dfsFill(
+  imageData: ImageData,
+  startColor: Uint8ClampedArray,
+  fillColor: number[],
+  startIndex: number,
+  context: CanvasRenderingContext2D,
+) {
+  if (colorsEqual(startIndex, imageData.data, fillColor)) return
+
+  const width = imageData.width
+  const row = width * 4
+  const length = imageData.data.length
+  /** Fila de índices */
+  const queue: number[] = []
+
+  queue.push(startIndex)
+
+  while (queue.length !== 0) {
+    const i = queue.pop()!
     if (!isWithinBounds(i, length)) continue
 
     if (!colorsEqual(i, imageData.data, fillColor)) {

@@ -15,7 +15,7 @@ export type Vector = {
   y: number
 }
 
-class Graph {
+export default class Digraph {
   adj: (Node | null)[] = []
   edges = 0
   vertices = 0
@@ -24,7 +24,7 @@ class Graph {
   constructor(vertices: number) {
     if (vertices <= 0) throw new Error('Invalid number of vertices')
 
-    this.adj = new Array(vertices)
+    this.adj = new Array(vertices).fill(null)
     this.vertices = vertices
     this.coords = new Array(vertices)
     for (let i = 0; i < this.coords.length; i++) {
@@ -36,26 +36,54 @@ class Graph {
     if (v < 0 || v > this.vertices) throw new Error('Invalid vertex ' + v)
   }
 
-  /**
-   * Não checa se `v` ou `w` já estão conectados.
-   */
   addEdge(v: number, w: number) {
     this.validateVertex(v)
     this.validateVertex(w)
 
     this.edges++
-    this.adj[w] = Node.create(v, this.adj[w])
     this.adj[v] = Node.create(w, this.adj[v])
+  }
+
+  hasEdge(v: number, w: number): boolean {
+    this.validateVertex(v)
+    this.validateVertex(w)
+
+    let node = this.adj[v]
+    while (node) {
+      if (node.data === w) return true
+      node = node.next
+    }
+
+    return false
+  }
+
+  /**
+   * A ordem normal é iterar nos nós de 0..n
+   *
+   * Se você quiser manter a ordem, itere nos nós na ordem
+   * n-1..0.
+   */
+  reversed(): Digraph {
+    const reversed = new Digraph(this.vertices)
+    let curr: Node | null
+    for (let i = 0; i < this.vertices; i++) {
+      curr = this.adj[i]
+      while (curr) {
+        reversed.addEdge(curr.data, i)
+        curr = curr.next
+      }
+    }
+    return reversed
   }
 
   toString() {
     let result = ''
     let curr: Node | null = null
     for (let i = 0; i < this.adj.length; i++) {
-      result += `${i}: `
+      result += `${i}:`
       curr = this.adj[i]
       while (curr != null) {
-        result += `${curr.data} `
+        result += ` ${curr.data}`
         curr = curr.next
       }
       result += '\n'
@@ -63,36 +91,14 @@ class Graph {
     return result
   }
 
-  isBipartite(): boolean {
-    return true
-  }
-
-  /**
-   * A string `s` deve vir no seguinte formato:
-   *
-   * ```
-   * V
-   * E
-   * v1 w1
-   * v2 w2
-   * v3 w3
-   * v4 w4
-   * ...
-   * ```
-   *
-   * Em que `V` é o número de vértices e `E` é o número de arestas.
-   * 0 <= `vi`, `wi` < `V` e `i` < `E`.
-   *
-   * @param s Representação em string de um grafo.
-   */
   static fromString(s: string) {
     const lines = s.split('\n')
     const [vertices, edges] = lines.splice(0, 2)
-    const g = new Graph(Number(vertices))
+    const g = new Digraph(Number(vertices))
 
     let i = 0
     for (; i < lines.length; i++) {
-      const [v, w] = lines[i].split(' ')
+      const [v, w] = lines[i].split(/\s+/)
       g.addEdge(Number(v), Number(w))
     }
 
@@ -100,6 +106,11 @@ class Graph {
       throw new Error(`${i} === ${edges} The given string is problably bad formatted`)
     return g
   }
-}
 
-export default Graph
+  /**
+   * Pensar em precedência
+   */
+  topologicallyOrdered() {
+    return [0]
+  }
+}

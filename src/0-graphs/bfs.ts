@@ -37,6 +37,9 @@ export default class Bfs {
     }
   }
 
+  /**
+   * Não foi implementado!
+   */
   distance(v: number, w: number): number {
     return this.graph.edges + v + w
   }

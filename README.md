@@ -18,12 +18,18 @@ Baixe esse repositório e entre nele:
 
 Você precisa ter [Node.js](https://nodejs.org/en) instalado no seu computador
 e um gerenciador de pacotes do Node como Yarn ou
-[pnpm](https://pnpm.io/installation) (mais rapidinho pra instalar dependências).
+[pnpm](https://pnpm.io/installation).
 
 ```
 pnpm i
 pnpm test
 ```
+
+Para acessar localmente execute
+
+    pnpm dev
+
+E vá para o endereço http://localhost:5173/ no seu navegador.
 
 <!--
 ## Godot
