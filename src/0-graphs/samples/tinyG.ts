@@ -1,3 +1,4 @@
+import type Digraph from '../digraph'
 import type Graph from '../graph'
 import type { GraphSample } from './sample'
 
@@ -17,7 +18,7 @@ const graph = `13
 9 11
 5 3`
 
-function setCoords(g: Graph, scale = 1) {
+function setCoords(g: Graph | Digraph, scale = 1) {
   g.coords[0].x = 10 * scale
   g.coords[0].y = 10 * scale
 

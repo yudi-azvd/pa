@@ -7,6 +7,4 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
-  "vitest.enable": true,
-  "vitest.commandLine": "pnpm test:watch"
 }
