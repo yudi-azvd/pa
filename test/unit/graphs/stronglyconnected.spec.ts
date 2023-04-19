@@ -18,4 +18,31 @@ describe('Strongly Connected', () => {
 
     expect(isStronglyConnected(g)).toBe(connected)
   })
+
+  it('another case', () => {
+    g = new Digraph(3)
+    g.addEdge(0, 1)
+    g.addEdge(1, 2)
+    g.addEdge(2, 0)
+
+    expect(isStronglyConnected(g)).toBe(true)
+  })
+
+  it('yet another case', () => {
+    g = new Digraph(3)
+    g.addEdge(0, 1)
+    g.addEdge(1, 2)
+    g.addEdge(2, 1)
+
+    expect(isStronglyConnected(g)).toBe(false)
+  })
+
+  it('yet another case 2', () => {
+    g = new Digraph(3)
+    g.addEdge(0, 1)
+    g.addEdge(0, 2)
+    g.addEdge(2, 1)
+
+    expect(isStronglyConnected(g)).toBe(false)
+  })
 })
