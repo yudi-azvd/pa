@@ -2,18 +2,11 @@ import type Graph from '@/0-graphs/graph'
 import type { GraphSample } from './sample'
 import type Digraph from '../digraph'
 
-/**
- * É o mesmo da imagem tinG_PA, mas considerando que o nó 0
- * é omitido.
- */
 const graph = `8
-7
-1 2
-1 5
-1 4
-4 2
-4 5
-2 6
+12
+0 1
+2 1
+// Tem que completar isso. mó preguiça
 3 7`
 
 export function setCoords(g: Graph | Digraph, scale = 1): void {
@@ -42,8 +35,8 @@ export function setCoords(g: Graph | Digraph, scale = 1): void {
   g.coords[7].y = 25 * scale
 }
 
-export const tinyG_PA: GraphSample = {
-  label: 'tiny G PA',
+export const tinyDG_SCC: GraphSample = {
+  label: 'tinyDG_SCC',
   sample: graph,
   setCoords,
 }
